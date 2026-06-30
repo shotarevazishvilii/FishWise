@@ -1,12 +1,15 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { LoaderCircle } from "lucide-react";
 import { useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 
 import { DatePicker } from "@/components/fishing/date-picker";
 import { FishSelect, fishSpeciesOptions } from "@/components/fishing/fish-select";
+import { analyzeFishingConditions } from "@/lib/api";
+import type { FishingResult } from "@/types/fishing";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -33,11 +36,15 @@ const fishingAnalysisSchema = z.object({
 
 type FishingAnalysisFormValues = z.infer<typeof fishingAnalysisSchema>;
 
+interface FishingAnalysisFormProps {
+  onAnalysisSuccess: (result: FishingResult) => void;
+}
+
 function formatDateForInput(date: Date) {
   return date.toISOString().split("T")[0] ?? "";
 }
 
-export function FishingAnalysisForm() {
+export function FishingAnalysisForm({ onAnalysisSuccess }: FishingAnalysisFormProps) {
   const minDate = useMemo(() => formatDateForInput(new Date()), []);
 
   const form = useForm<FishingAnalysisFormValues>({
@@ -54,11 +61,29 @@ export function FishingAnalysisForm() {
     register,
     handleSubmit,
     control,
-    formState: { errors, isValid },
+    setError,
+    clearErrors,
+    formState: { errors, isValid, isSubmitting },
   } = form;
 
-  const onSubmit = (values: FishingAnalysisFormValues) => {
-    console.log(values);
+  const onSubmit = async (values: FishingAnalysisFormValues) => {
+    clearErrors("root");
+
+    try {
+      const result = await analyzeFishingConditions({
+        location: values.location,
+        date: values.fishingDate,
+        fish: values.fishSpecies,
+      });
+
+      onAnalysisSuccess(result);
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Analysis could not be completed. Please try again.";
+      setError("root", { message });
+    }
   };
 
   return (
@@ -133,15 +158,28 @@ export function FishingAnalysisForm() {
               )}
             />
 
+            {errors.root?.message ? (
+              <p className="text-sm text-destructive" role="alert">
+                {errors.root.message}
+              </p>
+            ) : null}
+
             <div className="pt-2">
               <Button
                 type="submit"
                 size="lg"
-                disabled={!isValid}
+                disabled={!isValid || isSubmitting}
                 className="h-11 w-full sm:w-auto"
                 aria-label="Analyze conditions"
               >
-                Analyze Conditions
+                {isSubmitting ? (
+                  <>
+                    <LoaderCircle className="h-4 w-4 animate-spin" />
+                    Analyzing...
+                  </>
+                ) : (
+                  "Analyze Conditions"
+                )}
               </Button>
             </div>
           </form>

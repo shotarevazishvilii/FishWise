@@ -1,1 +1,6 @@
-export type { ApiError, FishingResult, WeatherData } from "./fishing";
+export type {
+  AnalyzeFishingConditionsInput,
+  ApiError,
+  FishingResult,
+  WeatherData,
+} from "./fishing";

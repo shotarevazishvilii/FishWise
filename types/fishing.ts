@@ -13,6 +13,12 @@ export interface FishingResult extends WeatherData {
   tips: string;
 }
 
+export interface AnalyzeFishingConditionsInput {
+  location: string;
+  date: string;
+  fish: string;
+}
+
 export interface ApiError {
   message: string;
   status?: number;
