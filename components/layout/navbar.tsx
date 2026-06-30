@@ -10,7 +10,8 @@ import { BRAND_LOGO_PATH } from "@/lib/constants";
 const navigationLinks = [
   { href: "#features", label: "Features" },
   { href: "#how-it-works", label: "How It Works" },
-];
+  { href: "/profile", label: "Profile", isRoute: true },
+] as const;
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,15 +31,25 @@ export function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
-          {navigationLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navigationLinks.map((link) =>
+            "isRoute" in link && link.isRoute ? (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </a>
+            ),
+          )}
           <a
             href="#analysis"
             className="inline-flex items-center rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
@@ -62,16 +73,27 @@ export function Navbar() {
       {isOpen ? (
         <div id="mobile-menu" className="border-t border-border/70 md:hidden">
           <nav className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 py-4 sm:px-6">
-            {navigationLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="rounded-md px-2 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.label}
-              </a>
-            ))}
+            {navigationLinks.map((link) =>
+              "isRoute" in link && link.isRoute ? (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-md px-2 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-md px-2 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ),
+            )}
             <a
               href="#analysis"
               className="mt-2 inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
