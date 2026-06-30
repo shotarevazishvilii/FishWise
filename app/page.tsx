@@ -7,8 +7,7 @@ import { Features } from "@/components/features";
 import { FishingAnalysisForm } from "@/components/fishing/fishing-analysis-form";
 import { Hero } from "@/components/hero";
 import { HowItWorks } from "@/components/how-it-works";
-import { Footer } from "@/components/layout/footer";
-import { Navbar } from "@/components/layout/navbar";
+import { SiteLayout } from "@/components/layout/site-layout";
 import { ResultsSection } from "@/components/results/results-section";
 import type { FishingResult } from "@/types/fishing";
 
@@ -27,8 +26,7 @@ export default function Home() {
   }, [analysisResult]);
 
   return (
-    <>
-      <Navbar />
+    <SiteLayout>
       <main className="overflow-x-hidden">
         <Hero />
         <FishingAnalysisForm onAnalysisSuccess={handleAnalysisSuccess} />
@@ -37,7 +35,6 @@ export default function Home() {
         <HowItWorks />
         <CTASection />
       </main>
-      <Footer />
-    </>
+    </SiteLayout>
   );
 }

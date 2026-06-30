@@ -25,16 +25,28 @@ export function Footer() {
             </p>
           </div>
 
-          <nav aria-label="Footer links" className="flex gap-6 text-sm">
-            <a href="#features" className="text-muted-foreground transition-colors hover:text-foreground">
+          <nav aria-label="Footer links" className="flex flex-wrap gap-6 text-sm">
+            <Link href="/" className="text-muted-foreground transition-colors hover:text-foreground">
+              Home
+            </Link>
+            <Link
+              href="/#features"
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
               Features
-            </a>
-            <a
-              href="#how-it-works"
+            </Link>
+            <Link
+              href="/#how-it-works"
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
               How It Works
-            </a>
+            </Link>
+            <Link
+              href="/profile"
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Profile
+            </Link>
           </nav>
         </div>
 

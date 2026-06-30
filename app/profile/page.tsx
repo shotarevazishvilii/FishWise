@@ -7,8 +7,7 @@ import { FavoriteLocations } from "@/components/profile/favorite-locations";
 import { ProfileCard } from "@/components/profile/profile-card";
 import { Statistics } from "@/components/profile/statistics";
 import { TripHistory } from "@/components/profile/trip-history";
-import { Footer } from "@/components/layout/footer";
-import { Navbar } from "@/components/layout/navbar";
+import { SiteLayout } from "@/components/layout/site-layout";
 
 export const metadata: Metadata = {
   title: "Fisherman Profile",
@@ -18,8 +17,7 @@ export const metadata: Metadata = {
 
 export default function ProfilePage() {
   return (
-    <>
-      <Navbar />
+    <SiteLayout>
       <main className="overflow-x-hidden">
         <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
           <div
@@ -63,7 +61,6 @@ export default function ProfilePage() {
           <ComingSoon />
         </div>
       </main>
-      <Footer />
-    </>
+    </SiteLayout>
   );
 }
