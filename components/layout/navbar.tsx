@@ -40,7 +40,7 @@ export function Navbar() {
             </a>
           ))}
           <a
-            href="#cta"
+            href="#analysis"
             className="inline-flex items-center rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
             Analyze Now
@@ -73,7 +73,7 @@ export function Navbar() {
               </a>
             ))}
             <a
-              href="#cta"
+              href="#analysis"
               className="mt-2 inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
               onClick={() => setIsOpen(false)}
             >

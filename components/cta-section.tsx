@@ -6,7 +6,7 @@ export function CTASection() {
           Ready to Plan Your Next Fishing Trip?
         </h2>
         <a
-          href="#"
+          href="#analysis"
           className="mt-6 inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           aria-label="Start analysis"
         >

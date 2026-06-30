@@ -1,5 +1,6 @@
 import { CTASection } from "@/components/cta-section";
 import { Features } from "@/components/features";
+import { FishingAnalysisForm } from "@/components/fishing/fishing-analysis-form";
 import { Hero } from "@/components/hero";
 import { HowItWorks } from "@/components/how-it-works";
 import { Footer } from "@/components/layout/footer";
@@ -11,6 +12,7 @@ export default function Home() {
       <Navbar />
       <main className="overflow-x-hidden">
         <Hero />
+        <FishingAnalysisForm />
         <Features />
         <HowItWorks />
         <CTASection />
