@@ -78,10 +78,8 @@ export function FishingAnalysisForm({ onAnalysisSuccess }: FishingAnalysisFormPr
 
       onAnalysisSuccess(result);
     } catch (error) {
-      const message =
-        error instanceof Error
-          ? error.message
-          : "Analysis could not be completed. Please try again.";
+      const fallbackMessage = "Unable to analyze fishing conditions. Please try again.";
+      const message = error instanceof Error ? error.message : fallbackMessage;
       setError("root", { message });
     }
   };
