@@ -23,8 +23,8 @@ export const fishSpeciesOptions = [
 interface FishSelectProps {
   id: string;
   label: string;
-  value?: string;
-  onChange: (value: string) => void;
+  value: string | null;
+  onChange: (value: string | null) => void;
   error?: string;
 }
 
@@ -34,7 +34,7 @@ export function FishSelect({ id, label, value, onChange, error }: FishSelectProp
   return (
     <div className="space-y-2">
       <Label htmlFor={id}>{label}</Label>
-      <Select value={value} onValueChange={(nextValue) => onChange(nextValue ?? "")}>
+      <Select value={value} onValueChange={(nextValue) => onChange(nextValue)}>
         <SelectTrigger
           id={id}
           className="h-10 w-full"

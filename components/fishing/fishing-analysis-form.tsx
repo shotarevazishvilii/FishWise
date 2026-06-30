@@ -149,8 +149,8 @@ export function FishingAnalysisForm({ onAnalysisSuccess }: FishingAnalysisFormPr
                 <FishSelect
                   id="fishSpecies"
                   label="Fish Species"
-                  value={field.value}
-                  onChange={field.onChange}
+                  value={field.value ?? null}
+                  onChange={(nextValue) => field.onChange(nextValue ?? undefined)}
                   error={errors.fishSpecies?.message}
                 />
               )}
